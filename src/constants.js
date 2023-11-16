@@ -49,7 +49,7 @@ export const themes = {
     // #### Keys
     resetDelBtnColor: "bg-cyan",
     resetDelBtnShadow: "bg-darkCyan",
-    resetDelBtnHover: "hover:bg-lightCyan",
+    resetDelBtnHover: "hover:bg-[#62b4bf]",
     resetDelBtnText: "text-white",
     equalToggleBtnColor: "bg-orange",
     equalToggleBtnShadow: "bg-darkOrange",

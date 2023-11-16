@@ -38,7 +38,7 @@ const ButtonsPad = ({ handleButton }) => {
             }`}
           >
             <button
-              className={`w-full h-full rounded py-2 z-20 relative text-[32px] ${hover} ${bgColor} ${fontColor}`}
+              className={`w-full h-full rounded z-20 relative text-[32px] ${hover} ${bgColor} ${fontColor}`}
               onClick={() => handleButton(button)}
             >
               {button}

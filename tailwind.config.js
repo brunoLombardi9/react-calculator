@@ -1,6 +1,8 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: [
+  "./index.html",
+  "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
@@ -52,7 +54,6 @@ export default {
         pureCyan: "hsl(176, 100%, 44%)",
         softCyan: "hsl(177, 92%, 70%)",
         purple: "#5b7e9e",
-        lightPurple: "#bf15f4",
         veryLightViolet: "#8631b0",
         lightViolet: "hsl(268, 47%, 21%)",
         darkMagenta: "hsl(290, 70%, 36%)",
@@ -62,5 +63,7 @@ export default {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar-hide')
+  ],
 };
