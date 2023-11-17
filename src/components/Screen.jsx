@@ -1,23 +1,34 @@
 import React, { useEffect, useRef } from "react";
 import { useTheme } from "../ThemeContext";
 
-const Screen = ({ result, currentCalc, operation }) => {
+const Screen = ({ topNumber, bottomNumber, operation }) => {
   const { theme } = useTheme();
-  const resultRef = useRef(null);
-  const currentCalcRef = useRef(null);
+  const topNumberRef = useRef(null);
+  const bottomNumberRef = useRef(null);
 
-  function scrollToRight() {
-    if (resultRef.current) {
-      resultRef.current.scrollLeft = resultRef.current.scrollWidth;
+  function scrollToRight(ref) {
+    if (ref.current) {
+      ref.current.scrollLeft = ref.current.scrollWidth;
     }
-    if (currentCalcRef.current) {
-      currentCalcRef.current.scrollLeft = currentCalcRef.current.scrollWidth;
+  }
+
+  function scrollToLeft(ref) {
+    if (ref.current) {
+      ref.current.scrollLeft = 0;
     }
   }
 
   useEffect(() => {
-    scrollToRight();
-  }, [result, currentCalc, operation]);
+    scrollToRight(topNumberRef);
+  }, [topNumber]);
+
+  useEffect(() => {
+    scrollToRight(bottomNumberRef);
+    if (topNumberRef.current.scrollLeft !== 0) {
+      scrollToLeft(topNumberRef);
+    }
+  }, [bottomNumber]);
+
 
   return (
     <div
@@ -26,7 +37,7 @@ const Screen = ({ result, currentCalc, operation }) => {
       <div className="col-span-1 order-2 h-full flex flex-col justify-center items-center">
         <p
           className={`text-center text-2xl ${
-            !currentCalc ? "text-4xl" : "text-2xl"
+            !bottomNumber ? "text-4xl" : "text-2xl"
           }`}
         >
           {operation}
@@ -35,24 +46,20 @@ const Screen = ({ result, currentCalc, operation }) => {
 
       <div className="w-full col-span-9 order-1">
         <p
-          ref={resultRef}
+          ref={topNumberRef}
           className={`${
-            !currentCalc ? "text-4xl" : "text-2xl"
+            !bottomNumber ? "text-4xl" : "text-2xl"
           } text-end overflow-x-scroll scrollbar-hide w-full`}
         >
-          {result}
+          {topNumber}
         </p>
 
-        {result !== "0" && (
-          <p
-            ref={currentCalcRef}
-            className={`${
-              !result ? "text-4xl" : "text-2xl"
-            } text-end overflow-x-scroll scrollbar-hide w-full`}
-          >
-            {currentCalc}
-          </p>
-        )}
+        <p
+          ref={bottomNumberRef}
+          className={`text-2xl text-end overflow-x-scroll scrollbar-hide w-full`}
+        >
+          {bottomNumber}
+        </p>
       </div>
     </div>
   );
